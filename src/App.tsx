@@ -15,7 +15,8 @@ import {
   Mail,
   Phone,
   Rocket,
-  ExternalLink
+  ExternalLink,
+  Bike
 } from 'lucide-react';
 import { Modal } from './components/Modal';
 import { LinkButton } from './components/Button';
@@ -88,17 +89,14 @@ const CoinLogo = () => {
     <motion.div
       style={{ rotateY: rotation }}
       onClick={handleClick}
-      className="w-24 h-24 mb-3 rounded-full border-2 border-white/10 shadow-xl overflow-hidden cursor-pointer relative group"
-      // Add perspective to parent or self for 3D effect
+      className="w-32 h-32 mb-4 cursor-pointer relative z-10"
       initial={{ rotateY: 0 }}
     >
-      <div className="w-full h-full bg-zinc-900 flex items-center justify-center">
-        <img src="/logo.png" alt="Ghabo Drinks Logo" className="w-full h-full object-cover p-1" />
-        {/* Backface visibility handling or overlay */}
-        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center transform rotate-y-180 backface-hidden backdrop-blur-sm">
-          <span className="text-xs font-serif italic text-gold-400">Ghabo</span>
-        </div>
-      </div>
+      <img 
+        src="/logo.png" 
+        alt="Ghabo Drinks Logo" 
+        className="w-full h-full object-contain filter drop-shadow-2xl" 
+      />
     </motion.div>
   );
 };
@@ -225,6 +223,12 @@ Aguardo retorno!`;
                 label="Dúvidas Frequentes" 
                 onClick={() => setActiveModal('faq')}
                 delay={0.5}
+              />
+              <LinkButton 
+                icon={Bike} 
+                label="Ghabo Delivery" 
+                onClick={() => setActiveModal('delivery')}
+                delay={0.6}
               />
             </div>
 
@@ -507,6 +511,29 @@ Aguardo retorno!`;
                 Ao clicar, você será redirecionado para o WhatsApp do desenvolvedor.
               </p>
             </div>
+          </div>
+        </div>
+      </Modal>
+
+      {/* Ghabo Delivery Modal */}
+      <Modal isOpen={activeModal === 'delivery'} onClose={closeModal} title="Ghabo Delivery">
+        <div className="space-y-6 text-center">
+          <div className="p-6 bg-gradient-to-br from-red-900/40 to-orange-900/40 rounded-2xl border border-red-500/20">
+            <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-red-300 via-orange-300 to-red-300 bg-clip-text text-transparent animate-text-gradient">
+              Drinks no conforto de casa!
+            </h3>
+            <p className="text-white/80 mb-6">
+              Siga nosso perfil de delivery e peça seus drinks favoritos.
+            </p>
+
+            <button 
+              onClick={() => window.open('https://www.instagram.com/ghabodelivery/', '_blank')}
+              className="w-full group relative flex items-center justify-center gap-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-4 rounded-xl hover:from-purple-500 hover:to-pink-500 transition-all shadow-lg shadow-purple-900/20 overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              <Instagram size={24} />
+              <span className="relative">Acessar @ghabodelivery</span>
+            </button>
           </div>
         </div>
       </Modal>
